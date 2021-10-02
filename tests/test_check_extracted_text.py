@@ -7,3 +7,4 @@ def test_extract_table_questions():
 	assert extracted_questions==["What’s your name?","How old are you?"]
 
 
+
