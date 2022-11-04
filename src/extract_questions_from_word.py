@@ -6,6 +6,7 @@ from docx.api import Document
 
 UPLOADS_FOLDER = "uploads"
 
+
 def do_extraction(filename):
     """ This is  do extraction function """
     table_questions = do_table_extraction(filename)
@@ -13,6 +14,7 @@ def do_extraction(filename):
     if table_questions:
         resp['TABLE_QUESTIONS'] = table_questions
     return resp
+
 
 def do_table_extraction(filename):
     """ This is  do table extraction function """

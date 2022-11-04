@@ -2,7 +2,6 @@
 This is main file
 """
 import argparse
-import traceback
 from flask import Flask, request, jsonify
 from extract_questions_from_word import do_extraction
 
@@ -14,10 +13,13 @@ APP.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 APP.config['JSON_AS_ASCII'] = False
 HOST_PORT = 5006
 
-def allowed_file(filename):
+
+def allowed_file(fname):
     """allowed file function"""
-    return '.' in filename and \
-           filename.rsplit('.', 1)[len(filename.rsplit('.', 1)) - 1].lower() in ALLOWED_EXTENSIONS
+    return '.' in fname and \
+           fname.rsplit('.', 1)[len(fname.rsplit('.', 1)) - 1].lower() in \
+           ALLOWED_EXTENSIONS
+
 
 @APP.route('/extract_questions', methods=['POST'])
 def magic_link():
@@ -25,6 +27,7 @@ def magic_link():
     if request.method == 'POST':
         return jsonify(do_extraction(request.args['path']))
     return None
+
 
 def main():
     """main function"""
@@ -36,8 +39,6 @@ def main():
         APP.debug = True
     APP.run(host='0.0.0.0', port=args.port)
 
+
 if __name__ == '__main__':
-    try:
-        main()
-    except: # pylint: disable=bare-except
-        traceback.print_exc()
+    main()
